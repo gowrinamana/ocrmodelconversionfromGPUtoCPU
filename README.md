@@ -37,19 +37,19 @@ while cap.isOpened():
     if not ret:
         break
 
-    # Skip frames for efficiency
+# Skip frames for efficiency
     if frame_count % frame_skip == 0:
         gray_frame = preprocess_frame(frame)
         results = reader.readtext(gray_frame)
 
-        # Use a heap to store top N confident results
+# Use a heap to store top N confident results
         for bbox, text, score in results:
             if len(frame_heap) < max_heap_size:
                 heapq.heappush(frame_heap, (score, bbox, text))
             else:
                 heapq.heappushpop(frame_heap, (score, bbox, text))
 
-        # Annotate frame with top results
+# Annotate frame with top results
         top_results = [(b, t, s) for s, b, t in sorted(frame_heap, reverse=True)]
         frame = annotate_frame(frame, top_results)
         out.write(frame)
