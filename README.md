@@ -13,7 +13,7 @@ cap = cv2.VideoCapture(video_path)
 
 # Check if the video file opened successfully
 if not cap.isOpened():
-    print("Error: Unable to open video file.")
+    print("Error: Unable to open  file.")
     exit()
 
 # Get video properties (frame width, height, and FPS)
